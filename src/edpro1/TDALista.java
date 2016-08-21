@@ -6,7 +6,7 @@ public abstract class TDALista {
 
     public TDALista(int cap) {
         this.cap = cap;
-        
+        this.size = 0;
     }
     
     public abstract boolean insert(Object target, int pos);

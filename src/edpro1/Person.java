@@ -10,6 +10,8 @@ public class Person {
         this.nombre = nombre;
         this.carrera = carrera;
     }
+    
+    
 
     public int getCuenta() {
         return cuenta;
@@ -17,7 +19,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "cuenta=" + cuenta + ", nombre=" + nombre + ", carrera=" + carrera + '}';
+        return "cuenta=" + cuenta;
     }
     
     

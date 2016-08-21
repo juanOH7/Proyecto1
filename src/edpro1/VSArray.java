@@ -1,19 +1,19 @@
 package edpro1;
 
 public class VSArray extends TDALista{
-    Object data[] = new Object[size];
+    Object data[] = new Object[cap];
 
-    public VSArray(int size) {
-        super(size);
+    public VSArray(int cap) {
+        super(cap);
     }
     
     public void resize(){
-        int newSize = (int)(size + size * 0.2);
-	Object temp[] = new Object[newSize];
+        int newCap = (int)(size + size * 0.5);
+	Object temp[] = new Object[newCap];
 	for (int i = 0; i < size; ++i){
 		temp[i] = data[i];
         }
-        cap = newSize;
+        cap = newCap;
 	data = temp;
     }
     
@@ -23,28 +23,39 @@ public class VSArray extends TDALista{
             return false;
         }
         if (isFull()) {
+            System.out.println("Full");
             resize();
         }
         if (isEmpty()) {
             data[0] = target;
         }else{
-            for (int i = size; i >= pos; i--) {
+            for (int i = size ; i > pos; i--) {
                 data[i] = data[i - 1]; 
             }
             data[pos] = target;
-            size++;
         }
+        size++;
         return true;
     }
     @Override
     public int indexOf(Object target){
         for (int i = 0; i < size; i++) {
-            if (target.equals(data[i])) {
+            if (equals(data[i],target)) {
                 return i;
             }
         }
         return -1;
     }
+    
+    
+    public boolean equals(Object target1, Object target2){
+        if (target1.getClass() != target2.getClass()) {
+            System.out.println("no same");
+            return false;
+        }
+        return target1.toString().equals(target2.toString());
+    }
+    
     @Override
     public Object get(int pos){
         return data[pos];
@@ -56,8 +67,8 @@ public class VSArray extends TDALista{
             return false;
         }
         Object temp = data[pos];
-        for (int i = pos; i <= size; i++) {
-            data[i + 1] = data[i]; 
+        for (int i = pos; i < size - 1; i++) {
+            data[i] = data[i + 1]; 
         }
         size--;
         return temp;
