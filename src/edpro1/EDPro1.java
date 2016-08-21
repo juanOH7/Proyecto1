@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package edpro1;
 
-/**
- *
- * @author Juan O'Hara
- */
 public class EDPro1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        TDALista list = new VSArray(4);
+        Person  a = new Person(0, "juan", "sistemas");
+        Person  b = new Person(1, "car", "sistemas");
+        
+        System.out.println(list.insert(a, 0));
+        System.out.println(list.insert(b, 0));
+        System.out.println(list.insert(b, 0));
+        System.out.println(list.insert(b, 0));
+        System.out.println(list.insert(b, 0));
+
+        System.out.println(list.getSize());
+        System.out.println(list.indexOf(a));
+        System.out.println(list.erase(1));
+        System.out.println(list.getSize());
     }
     
 }
