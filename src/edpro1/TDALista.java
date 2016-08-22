@@ -14,6 +14,7 @@ public abstract class TDALista {
     public abstract Object get(int pos);
     public abstract Object erase(int pos);
     public abstract void reset();
+    public abstract boolean set(Object neo,int pos);
     public abstract Object first();
     public abstract Object last();
     public abstract boolean isEmpty();

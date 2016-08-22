@@ -10,6 +10,14 @@ public class Person {
         this.nombre = nombre;
         this.carrera = carrera;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getCarrera() {
+        return carrera;
+    }
     
     
 
@@ -19,7 +27,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "cuenta=" + cuenta;
+        return "cuenta=" + cuenta +" "+ "Nombre=" + nombre;
     }
     
     

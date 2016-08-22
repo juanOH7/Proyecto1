@@ -46,7 +46,14 @@ public class VSArray extends TDALista{
         }
         return -1;
     }
-    
+    public boolean set(Object neo, int pos){
+        if (pos < 0 || pos > size - 1) {
+            return false;
+        }
+        data[pos] = neo;
+        return true;
+    }
+
     
     public boolean equals(Object target1, Object target2){
         if (target1.getClass() != target2.getClass()) {
