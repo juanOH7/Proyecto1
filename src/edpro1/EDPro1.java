@@ -10,8 +10,6 @@ import java.util.Scanner;
 public class EDPro1 {
 
     public static void main(String[] args) throws FileNotFoundException {
-        PrintWriter pw = new PrintWriter(new File("final.csv"));
-        StringBuilder sb = new StringBuilder();
         TDALista list = new VSArray(4);
         boolean running = true, contin = true;
         int resp,cont,result;
@@ -26,19 +24,25 @@ public class EDPro1 {
             Person tmp = new Person(Integer.parseInt(divCom[0]), divCom[1], divCom[2]);
             list.insert(tmp, 0);
         }
-        TDALista listRes = new VSArray(list.getSize());
-        TDALista conteo = new VSArray(list.getSize());
-        for (int i = 0; i < list.getSize(); i++) {
+        int siz = list.getSize();
+        TDALista listRes = new VSArray(siz);
+        TDALista conteo = new VSArray(siz);
+        for (int i = 0; i < siz; i++) {
             listRes.insert(0, i);
-        }for (int i = 0; i < list.getSize(); i++) {
+        }
+        for (int i = 0; i < siz; i++) {
             conteo.insert(0, i);
+        }
+        TDALista prom = new VSArray(siz);
+        for (int i = 0; i < siz; i++) {
+            prom.insert(0, i);
         }
         while (running) {   
             System.out.println("1-Listar\n2-Preguntas\n3-Resultados\n4-Salir");
             
             resp = sc2.nextInt();
             if (resp == 1){
-                for (int i = 0; i < list.getSize(); i++) {
+                for (int i = 0; i < siz; i++) {
                      System.out.print(((Person) list.get(i)).getCuenta()+",");
                      System.out.print(((Person) list.get(i)).getNombre()+",");
                      System.out.print(((Person) list.get(i)).getCarrera());
@@ -46,7 +50,7 @@ public class EDPro1 {
                 }
             }else  if (resp == 2) {
                 while (contin) {
-                    int numPos = generator.nextInt(list.getSize());
+                    int numPos = generator.nextInt(siz);
                     result = (int)listRes.get(numPos);
                     int numCon =(int)conteo.get(numPos);
                     System.out.println("Alumno "+((Person) list.get(numPos)).getNombre());
@@ -55,6 +59,7 @@ public class EDPro1 {
                     numCon++;
                     listRes.set(result, numPos);
                     conteo.set(numCon, numPos);
+                    prom.set((int)listRes.get(numPos)/(int)conteo.get(numPos), numPos);
                     System.out.println("Continuar [S/N]");
                     resp2 = sc2.next();
                     contin = (resp2.equals("S") || resp2.equals("s"));
@@ -66,15 +71,13 @@ public class EDPro1 {
                     System.out.println("");
                 }
             }else{
-                int prom;
-                for (int i = 0; i < list.size; i++) {
-                    while (!((int)conteo.get(i) == 0)) {                        
-                        prom = (int)listRes.get(i)/(int)conteo.get(i);
-                        sb.append(prom);
-                        sb.append(",");
+                PrintWriter pw = new PrintWriter(new File("final.csv"));
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i <siz; i++) {
+                        sb.append(prom.get(i));
+                        sb.append(',');
                         sb.append(((Person)list.get(i)).getCuenta());
-                        sb.append("\n");
-                    }
+                        sb.append('\n');
                 }
                 pw.write(sb.toString());
                 pw.close();
